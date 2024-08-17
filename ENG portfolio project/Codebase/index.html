@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Blog Project</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        .navbar {
+            border-bottom: 1px solid #dee2e6;
+            margin-bottom: 20px;
+        }
+
+        .navbar-brand {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 1.1rem;
+            color: #495057;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #343a40;
+        }
+
+        .featured-post {
+            background-image: url('./Images/CrowdStrike_background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 50px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            position: relative;   
+        }    
+
+        .featured-post::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(52, 58, 64, 0.8); /* Add a semi-transparent overlay */
+            border-radius: 5px;
+        }
+
+        .featured-post h2, .featured-post p, .featured-post a {
+            position: relative;
+            z-index: 1;
+        }
+
+        .featured-post a:hover {
+            color: #cccccc;
+        }
+
+        /* Sub-featured post styles */
+        .sub-featured-post {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .sub-featured-post .thumbnail {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 5px;
+        }
+
+        .sub-featured-post .thumbnail:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            color: white;
+        }
+
+        .sub-featured-post .content {
+            width: 50%;
+            padding: 20px;
+        }
+
+        .sub-featured-post .content h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .sub-featured-post .content p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            margin-top: 30px;
+        }
+
+        .sidebar h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .sidebar p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        /* Blog post styles */
+        .blog-post h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .blog-post h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .blog-post p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .blog-post a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .blog-post a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            border-top: 1px solid #dee2e6;
+            margin: 20px 0;
+        }
+
+        /* Additional styles for the blog content */
+        .blog-post .content p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .blog-post .content code {
+            padding: 0.2rem 0.4rem;
+            font-size: 0.9rem;
+            color: #e83e8c;
+            background-color: #f8f9fa;
+            border-radius: 0.2rem;
+        }
+
+        .blog-post .content ul {
+            margin-top: 10px;
+        }
+
+        .blog-post .content ul li {
+            margin-bottom: 5px;
+        }
+
+        /* Thumbnail backgrounds */
+        .thumbnail-project1 {
+            background-image: url('./Images/project\ 1\ thumbnail.png');
+        }
+
+        .thumbnail-project2 {
+            background-image: url('./Images/project\ 2\ thumbnail.png');
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        body.dark-mode .navbar, body.dark-mode .sidebar {
+            background-color: #1c1c1c;
+            border-color: #333333;
+        }
+
+        body.dark-mode .navbar-brand {
+            color: #ffffff;
+        }
+
+        body.dark-mode .navbar-nav .nav-link {
+            color: #b3b3b3;
+        }
+
+        body.dark-mode .navbar-nav .nav-link:hover {
+            color: #ffffff;
+        }
+
+        body.dark-mode .featured-post {
+            background-color: #1c1c1c;
+            color: #ffffff;
+        }
+
+        body.dark-mode .featured-post::before {
+            background-color: rgba(18, 18, 18, 0.8); /* Adjust overlay for dark mode */
+        }
+
+        body.dark-mode .sub-featured-post {
+            background-color: #1c1c1c;
+            color: #ffffff;
+        }
+
+        body.dark-mode .sub-featured-post .thumbnail {
+            color: #ffffff;
+        }
+
+        body.dark-mode .blog-post {
+            background-color: #1c1c1c;
+            color: #ffffff;
+        }
+
+        body.dark-mode .blog-post a {
+            color: #1e90ff;
+        }
+
+        body.dark-mode .divider {
+            border-top-color: #333333;
+        }
+
+        body.dark-mode .sidebar h4,
+        body.dark-mode .sidebar p {
+            color: #b3b3b3;
+        }
+
+        body.dark-mode .archive-list a {
+            color: #1e90ff;
+        }
+
+        body.dark-mode .list-unstyled a {
+            color: #1e90ff;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container mt-5 pb-5"> <!-- Added padding to the bottom -->
+        <!-- Header -->
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand text-center" href="#">Portfolio Blog Project</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <button id="dark-mode-toggle" class="btn btn-secondary">Toggle Dark Mode</button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Featured Blog Post -->
+        <div class="featured-post text-center">
+            <h2>Global IT Outages Caused by CrowdStrike Implications</h2>
+            <p>The recent CrowdStrike outage, which occurred on July 19, 2024, caused widespread disruptions across various sectors globally, including critical services such as healthcare, airlines, small businesses and emergency services. This report explores the reasons behind this major cybersecurity incident, its effects, and the reactions to it, emphasizing the difficulties and lessons discovered.</p>
+            <a href="./Code/project1.html">Continue reading...</a>
+        </div>
+
+        <!-- Sub-featured Posts -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="sub-featured-post">
+                    <div class="content">
+                        <h3 class="text-primary">Cars</h3>
+                        <h3>Oil Changes For Motor Vehicles</h3>
+                        <p>Nov 12</p>
+                        <p>To ensure a successful oil change, please carefully follow the instructions.</p>
+                        <a href="./Code/project3.html">Continue reading</a>
+                    </div>
+                    <a href="./Code/project3.html" class="thumbnail thumbnail-project1">
+                        View Project 1
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="sub-featured-post">
+                    <div class="content">
+                        <h3 class="text-success">Technology</h3>
+                        <h3>Data Security and Privacy</h3>
+                        <p>Nov 11</p>
+                        <p>Information security is at an all-time high, we can never be too safe on the internet.</p>
+                        <a href="./Code/project2.html">Continue reading</a>
+                    </div>
+                    <a href="./Code/project2.html" class="thumbnail thumbnail-project2">
+                        View Project 2
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Post and Sidebar -->
+        <div class="row">
+            <div class="col-md-8 blog-post">
+                <h3>English 338 Portfolio</h3>
+                <hr> <!-- Line below "From the Firehose" -->
+                <h4>Data Privacy, Automotive Maintenance, and Cybersecurity</h4>
+                <p>August 13th, 2024 by Robert Mitchell Jr</p>
+                <p>It is crucial to be informed on a wide range of issues in today's society, whether they impact you directly or could hinder your daily life. These latest initiatives explored include a variety of topics, including the complicated nature of cybersecurity, the realities of car maintenance, and the crucial topic of data privacy.</p>
+                <hr> <!-- Line below the introductory text -->
+                <h4>The Significance of Cybersecurity: An Extensive Analysis of the recent CrowdStrike Event</h4>
+                <p>Cybersecurity is still the biggest worry in technology today, with outages leading to major disruptions in many different businesses globally. The first project centers on a major event that included the well-known cybersecurity company CrowdStrike and its worldwide ramifications. This research project looks at what caused the outage, how it affected necessary services like healthcare and aviation (FAA), and what can be obtained from it. This in-depth analysis emphasizes the difficulties businesses have protecting their digital infrastructures utilizing sophisticated cybersecurity tools.</p>
+                <h4>Car Maintenance: The Importance of Continual Oil Changes</h4>
+                <p>Regular oil changes are one of the most essential parts of vehicle care, and maintaining a car is a duty that needs constant attention. The second project provides a thorough how-to manual for oil changes, highlighting the significance of necessary maintenance to extend the lifetime and effectiveness of your vehicle. This project deconstructs the procedure, and illustrates how skipping this easy step can result in serious engine problems. Anyone who wants to ensure maximum performance and prolong the life of their car should indulge into the reading, as it is a DIY project. It highlights the significance that any individual, mechanically inclined or not, can receive the same results.</p>
+                <h4>Securing Your Digital Life: Extensive Analysis on Data Privacy and Security</h4>
+                <p>In an era where data is often referred to as the oil of society, personal information and organizations have to be protected more than ever. In order to protect sensitive information from breaches and unwanted access, this project explores the best practices in data privacy and security. This project encompasses a wide range of subjects, such as encryption, safe communication techniques, and the function of legal frameworks in securing user data:</p>
+                <ul>
+                    <li>Encryption</li>
+                    <li>Safe communication techniques</li>
+                    <li>Function of legal frameworks in securing user data</li>
+                </ul>
+                <p>In an effort to increase awareness of the value of data privacy in the current digital environment, this project provides useful guidance for both consumers and organizations.</p>
+            </div>
+            <div class="col-md-4 sidebar">
+                <h4>About Me</h4>
+                <p>I'm just your average student studying cybersecurity or at least I like to think I am. Although I spend way to much time indulging into it in my free time. I'm very passionate about the problems that real-world security faces. Some of the other topics that I choose for this portfolio project indulge in things I find important such as automotive care, global IT issues, and maintaining a secure footprint in the world. Myself, as just as many others, don't need the entire world to know what me or my family is doing on the internet. Sometimes we may need to take a step back from the internet and question why we do the things we do, or rather how important it is for the world to truly see it.</p>
+                <div class="divider"></div>
+                <h4>Archives</h4>
+                <ul class="archive-list">
+                    <li><a href="#">March</a></li>
+                    <li><a href="#">February</a></li>
+                    <li><a href="#">January</a></li>
+                    <li><a href="#">December</a></li>
+                    <li><a href="#">November</a></li>
+                    <li><a href="#">October</a></li>
+                    <li><a href="#">September</a></li>
+                    <li><a href="#">August</a></li>
+                    <li><a href="#">July</a></li>
+                    <li><a href="#">June</a></li>
+                    <li><a href="#">May</a></li>
+                    <li><a href="#">April</a></li>
+                </ul>
+                <div class="divider"></div>
+                <h4>Elsewhere</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const toggleButton = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>
